@@ -1,0 +1,7 @@
+.main {
+    &_container {
+        min-height: calc(100vh - 60px);
+        padding-top: 32px;
+        background-color: rgb(236, 236, 236);
+    }
+}
