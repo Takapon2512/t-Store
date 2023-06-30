@@ -8,9 +8,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-//Recoil関係
-import { useRecoilState } from 'recoil'
-import { checkUser } from "@/store/AuthState";
+//Recoil
+import { useRecoilState } from "recoil";
+import { userNameState } from '@/store/AuthState'
 
 //MUI
 import { 
@@ -35,6 +35,12 @@ import {
 } from "firebase/auth";
 import { getAuth, GoogleAuthProvider } from 'firebase/auth'
 import app from "../../libs/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../../libs/firebase";
+import { 
+    collection, 
+    getDocs
+} from 'firebase/firestore'
 
 //フォームの型
 type SignUpType = {
@@ -63,15 +69,17 @@ const schema = yup.object({
 const Home = () => {
   const auth = getAuth(app)
   const provider = new GoogleAuthProvider()
-  //Recoil
+  
+  //useState
   const [isUser, setIsUser] = useState<User | null>(null)
-
-  //UseState
   const [formText, setFormText] = useState<SignUpType>({
     email: '',
     name: '',
     password: ''
   })
+
+  //Recoil
+  const [userName, setUserName] = useRecoilState(userNameState)
 
   //UseRouter
   const router = useRouter()
@@ -89,12 +97,22 @@ const Home = () => {
   })
 
   //フォーム送信時の処理
-  const onSubmit: SubmitHandler<SignUpType> = (data) => {
-    setFormText({
-      email: '',
-      name: '',
-      password: ''
-    })
+  const onSubmit: SubmitHandler<SignUpType> = async () => {
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        formText.email,
+        formText.password
+      )
+    } catch(error) {
+      alert('正しく入力してください')
+    }
+
+    //ユーザーの名前をローカルストレージに保存
+    localStorage.setItem('user', formText.name)
+
+    if (isUser) router.push('./mypage/Mypage')
+
   }
 
   //Googleアカウントを利用したサインイン処理
@@ -102,8 +120,11 @@ const Home = () => {
     await signInWithPopup(auth, provider)
     .catch((err) => alert(`ログインに失敗しました。`))
 
-    router.push('../mypage/mypage')
+    if (isUser) router.push('../mypage/Mypage')
   }
+
+  //ログインページに遷移
+  const toLoginPage = () => router.push('./signIn/SignIn')
 
   //ログインしているかを判定
   useEffect(() => {
@@ -111,8 +132,8 @@ const Home = () => {
       setIsUser(currentUser)
     })
 
-    if (isUser) router.push('../mypage/mypage')
-  })
+    if (isUser) router.push('../mypage/Mypage')
+  }, [isUser])
 
   return (
     <>
@@ -174,6 +195,7 @@ const Home = () => {
           </Button>
           <Button 
           variant="outlined"
+          onClick={toLoginPage}
           >
             アカウントをお持ちの方はこちら
           </Button>

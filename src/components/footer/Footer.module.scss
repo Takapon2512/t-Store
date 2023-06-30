@@ -1,0 +1,15 @@
+.app {
+    &_footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(14, 34, 14);
+        color: rgb(250, 255, 253);
+        height: 60px;
+    }
+
+    &_title {
+        letter-spacing: 1px;
+        line-height: 100%;
+    }
+}

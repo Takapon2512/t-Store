@@ -1,0 +1,33 @@
+.task {
+    &_Card {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: rgb(203, 240, 186);
+        }
+    }
+
+    &_CardContent {
+        padding: 0 16px;
+        width: 100%;
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
+
+    &_title {
+        width: 64px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-radius: 2px;
+        color: rgb(236, 236, 236);
+        background-color: rgb(74, 177, 74);
+    }
+}

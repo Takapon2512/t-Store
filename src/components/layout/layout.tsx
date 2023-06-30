@@ -2,16 +2,14 @@ import React from 'react'
 import Head from 'next/head'
 
 //MUI
-import { 
-  Box,
-  Typography
-} from '@mui/material'
+import { Box } from '@mui/material'
 
 //CSS
 import styles from './layout.module.scss'
 
 //components
-import Header from '../header/header'
+import Header from '../header/Header'
+import Footer from '../footer/Footer'
 
 const Layout = ({children}: {children: React.ReactNode}) => {
   return (
@@ -25,6 +23,7 @@ const Layout = ({children}: {children: React.ReactNode}) => {
     <Box component={'main'} className={styles.main_container}>
       {children}
     </Box>
+    <Footer />
     </>
   )
 }

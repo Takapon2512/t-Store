@@ -9,7 +9,7 @@ import {
 //CSS
 import styles from './header.module.scss'
 
-const header = () => {
+const Header = () => {
   return (
     <>
     <Box component={'header'} className={styles.app_header}>
@@ -21,4 +21,4 @@ const header = () => {
   )
 }
 
-export default header
+export default Header

@@ -1,0 +1,11 @@
+.task {
+
+    &_Stack {
+        width: calc(36% - 16px);
+        margin-right: 8px;
+    }
+
+    &_Stack:last-child {
+        margin-right: 0;
+    }
+}

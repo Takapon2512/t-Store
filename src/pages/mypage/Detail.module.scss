@@ -1,0 +1,94 @@
+.textColor {
+    color: #252525
+}
+
+.detail {
+    &_title {
+        width: 100%;
+        margin-bottom: 24px;
+
+        & input {
+            font-size: 32px;
+            font-weight: 600;
+            @extend .textColor;
+        }
+    }
+
+    &_subtitle {
+        font-size: 22px;
+        font-weight: 600;
+        margin-left: 8px;
+    }
+
+    &_stateContainer {
+        margin-bottom: 24px;
+    }
+
+    &_stateTitle, &_commentTitle {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        @extend .textColor;
+    }
+
+    &_incomplete, &_progress, &_complete {
+        width: 96px;
+        margin-right: 8px;
+        color: rgb(236, 236, 236);
+        background-color: rgb(170, 170, 170);
+
+        &:hover {
+            background-color: rgb(31, 223, 31);
+            opacity: 0.9;
+        }
+
+    }
+
+    &.active {
+        background-color: rgb(31, 223, 31);
+    }
+
+    &_complete {
+        margin-right: 0;
+    }
+
+    &_commentContainer {
+        margin-bottom: 16px;
+    }
+
+    &_setting, &_back, &_delete {
+        width: 96px;
+        color: rgb(236, 236, 236);
+        transition: opacity 0.2s;
+    }
+
+    &_setting {
+        background-color: rgb(37, 37, 37);
+        margin-right: 8px;
+
+        &:hover {
+            background-color: rgb(37, 37, 37);
+            opacity: 0.9;
+        }
+    }
+
+    &_delete {
+        background-color: rgb(240, 55, 22);
+        margin-right: 8px;
+
+        &:hover {
+            background-color: rgb(240, 55, 22);
+            opacity: 0.9;
+        }
+    }
+
+    &_back {
+        background-color: rgb(29, 97, 223);
+
+        &:hover {
+            background-color: rgb(29, 97, 223);
+            opacity: 0.9;
+        }
+    }
+
+}
